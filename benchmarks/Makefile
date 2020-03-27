@@ -20,8 +20,10 @@ instbasedir = $(UCB_VLSI_HOME)/install
 bmarks = \
 	csaxpy \
 	cmplxmult \
+	imax \
 	vec-csaxpy \
 	vec-cmplxmult \
+	vec-imax \
 
 #--------------------------------------------------------------------
 # Build rules

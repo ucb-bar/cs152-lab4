@@ -21,10 +21,12 @@ bmarks = \
 	csaxpy \
 	cmplxmult \
 	dgemv \
+	dgemm \
 	imax \
 	vec-csaxpy \
 	vec-cmplxmult \
 	vec-dgemv \
+	vec-dgemm \
 	vec-imax \
 
 #--------------------------------------------------------------------

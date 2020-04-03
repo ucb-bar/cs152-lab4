@@ -23,11 +23,13 @@ bmarks = \
 	dgemv \
 	dgemm \
 	imax \
+	spmv \
 	vec-csaxpy \
 	vec-cmplxmult \
 	vec-dgemv \
 	vec-dgemm \
 	vec-imax \
+	vec-spmv \
 
 #--------------------------------------------------------------------
 # Build rules

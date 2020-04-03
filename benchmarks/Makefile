@@ -24,12 +24,14 @@ bmarks = \
 	dgemm \
 	imax \
 	spmv \
+	rsort \
 	vec-csaxpy \
 	vec-cmplxmult \
 	vec-dgemv \
 	vec-dgemm \
 	vec-imax \
 	vec-spmv \
+	vec-rsort \
 
 #--------------------------------------------------------------------
 # Build rules

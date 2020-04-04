@@ -43,7 +43,7 @@ RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -Wa,-march=rv64gcv_zvlsseg -mcmodel=medany -st
 RISCV_LINK ?= $(RISCV_GCC) -T $(src_dir)/common/test.ld $(incs)
 RISCV_LINK_OPTS ?= -static -nostdlib -nostartfiles -lm -lgcc -T $(src_dir)/common/test.ld
 RISCV_OBJDUMP ?= $(RISCV_PREFIX)objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data
-RISCV_SIM ?= spike --isa=rv$(XLEN)gcv --dc=128:4:64 -l
+RISCV_SIM ?= spike --isa=rv$(XLEN)gcv --dc=64:8:64 --varch=vlen:256,elen:64,slen:256 -l
 
 incs  += -I$(src_dir)/../env -I$(src_dir)/common $(addprefix -I$(src_dir)/, $(bmarks))
 objs  :=
@@ -61,12 +61,16 @@ $(foreach bmark,$(bmarks),$(eval $(call compile_template,$(bmark))))
 bmarks_riscv_bin  = $(addsuffix .riscv,  $(bmarks))
 bmarks_riscv_dump = $(addsuffix .riscv.dump, $(bmarks))
 bmarks_riscv_out  = $(addsuffix .riscv.out,  $(bmarks))
+bmarks_riscv_log  = $(addsuffix .riscv.log,  $(bmarks))
 
 $(bmarks_riscv_dump): %.riscv.dump: %.riscv
 	$(RISCV_OBJDUMP) $< > $@
 
 $(bmarks_riscv_out): %.riscv.out: %.riscv
 	$(RISCV_SIM) $< 2> $@
+
+$(bmarks_riscv_log): %.riscv.log: %.riscv
+	$(RISCV_SIM) --log-commits $< 2> $@
 
 riscv: $(bmarks_riscv_dump)
 run: $(bmarks_riscv_out)

@@ -4,6 +4,7 @@
 *.o
 *.dump
 *.out
+*.log
 *.hex
 .*.swp
 *.pyc

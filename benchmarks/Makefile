@@ -102,3 +102,19 @@ install-link:
 
 clean:
 	rm -rf $(objs) $(junk)
+
+#------------------------------------------------------------
+# CS152: Submit
+
+define zip_template
+.PHONY: $(1)
+$(1): $(foreach bmark,$(3),$(wildcard $(src_dir)/$(bmark)/*.S))
+	rm -f -- $(2)
+	zip -j $(2) $$^
+
+junk += $(2)
+endef
+
+$(eval $(call zip_template,zip-directed,directed.zip,vec-cmplxmult vec-dgemv vec-dgemm vec-imax))
+$(eval $(call zip_template,zip-spmv,vec-spmv.zip,vec-spmv))
+$(eval $(call zip_template,zip-rsort,vec-rsort.zip,vec-rsort))

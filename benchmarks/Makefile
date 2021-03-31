@@ -39,11 +39,11 @@ bmarks = \
 
 RISCV_PREFIX ?= riscv$(XLEN)-unknown-elf-
 RISCV_GCC ?= $(RISCV_PREFIX)gcc
-RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -Wa,-march=rv64gcv_zvlsseg -mcmodel=medany -static -std=gnu11 -O2 -ffast-math -fno-common -fno-builtin-printf
+RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -Wa,-march=rv64gcv_zvlsseg -mcmodel=medany -static -std=gnu11 -O2 -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns
 RISCV_LINK ?= $(RISCV_GCC) -T $(src_dir)/common/test.ld $(incs)
 RISCV_LINK_OPTS ?= -static -nostdlib -nostartfiles -lm -lgcc -T $(src_dir)/common/test.ld
 RISCV_OBJDUMP ?= $(RISCV_PREFIX)objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data
-RISCV_SIM ?= spike --isa=rv$(XLEN)gcv --dc=64:8:64 --varch=vlen:256,elen:64,slen:256 -l
+RISCV_SIM ?= spike --isa=rv$(XLEN)gcv --ic=64:4:64:16 --dc=64:4:64:16 --l2=1024:8:64:58 --br=3:28:512:6 --varch=vlen:512,elen:64,dlen:128 -l
 
 incs  += -I$(src_dir)/../env -I$(src_dir)/common $(addprefix -I$(src_dir)/, $(bmarks))
 objs  :=

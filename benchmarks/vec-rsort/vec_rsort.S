@@ -26,9 +26,11 @@ vec_rsort:
     sd s0, 8(sp)
     sd ra, 0(sp)
 
-    mv s0, a1                       # initialize arr pointer
+    mv s0, a1                       # save arrIn pointer
+    # NOTE: DO NOT clobber s0; use a1 as arr pointer
 
     # NOTE: change code structure if necessary
+vec_rsort_loop:
 
 vec_rsort_reset:
     # TODO: clear buckets
@@ -53,9 +55,8 @@ vec_rsort_permute:
 
     # copy scratch to arrIn if necessary
     beq a1, s0, vec_rsort_done
-    mv a0, a1                       # arrIn
-    mv a1, s0                       # arr
     slli a2, a0, 2                  # n * sizeof(type)
+    mv a0, s0                       # arrIn
     call memcpy
 
 vec_rsort_done:

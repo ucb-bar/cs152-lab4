@@ -20,7 +20,7 @@
  *
  * Pseudocode:
  *     for (j = 0; j < n; j++) {
- *         for (k = 0; k < (n/4)*4; k++) {
+ *         for (k = 0; k < (n/4)*4; k += 4) {
  *             C[i][j] += A[i][k]   * B[k][j];
  *             C[i][j] += A[i][k+1] * B[k+1][j];
  *             C[i][j] += A[i][k+2] * B[k+2][j];

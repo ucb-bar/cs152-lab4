@@ -21,7 +21,7 @@ void spmv(size_t r, const double* val, const int* idx, const double* x,
   {
     size_t k;
     double yi0 = 0, yi1 = 0, yi2 = 0, yi3 = 0;
-    for (k = ptr[i]; k < ptr[i+1]-3; k+=4)
+    for (k = ptr[i]; (k+3) < ptr[i+1]; k+=4)
     {
       yi0 += val[k+0]*x[idx[k+0]];
       yi1 += val[k+1]*x[idx[k+1]];

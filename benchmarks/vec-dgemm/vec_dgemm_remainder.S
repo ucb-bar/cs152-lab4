@@ -40,7 +40,7 @@ dgemm_remainder:
     add t3, a1, t3                  # compute pointer to A[i][(n/4)*4]
 
 dgemm_remainder_loop_j:
-    vsetvli t0, a0, e64, m4         # configure SEW=64 LMUL=4
+    vsetvli t0, a0, e64, m4, ta, ma # configure SEW=64 LMUL=4
     sub a0, a0, t0                  # decrement n
     slli t0, t0, 3                  # scale VL to byte offset
 

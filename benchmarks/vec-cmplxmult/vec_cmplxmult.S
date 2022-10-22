@@ -19,7 +19,7 @@
  *     a3: struct Complex *c
  */
 cmplxmult:
-    vsetvli t0, a0, e32, m4     # configure SEW=32 LMUL=4
+    vsetvli t0, a0, e32, m4, ta, ma   # configure SEW=32 LMUL=4
 
     # TODO: load a[i].real and a[i].imag
     # TODO: load b[i].real and b[i].imag

@@ -20,15 +20,15 @@
  */
 imax:
 1:  auipc t0, %pcrel_hi(input_inf)
-    flw ft0, %pcrel_lo(1b)(t0)  # initialize maximum to -infinity
-    vsetvli zero, zero, e32, m8 # preconfigure vector state
-    vfmv.s.f v24, ft0           # move -infinity to scalar in v24;
-                                # may be useful for reductions
-    li t1, 0                    # initialize index
-    mv t2, a0                   # save n for index calculations
+    flw ft0, %pcrel_lo(1b)(t0)          # initialize maximum to -infinity
+    vsetvli zero, zero, e32, m8, ta, ma # preconfigure vector state
+    vfmv.s.f v24, ft0                   # move -infinity to scalar in v24;
+                                        # may be useful for reductions
+    li t1, 0                            # initialize index
+    mv t2, a0                           # save n for index calculations
 
 imax_loop:
-    vsetvli t0, a0, e32, m8     # configure SEW=32 LMUL=8
+    vsetvli t0, a0, e32, m8, ta, ma     # configure SEW=32 LMUL=8
 
     # TODO: load x[k] vector
     # TODO: find maximum value in vector
@@ -38,10 +38,10 @@ imax_loop:
     # TODO: update index as necessary
     # TODO: update maximum as necessary
 
-    sub a0, a0, t0              # decrement n
-    slli t0, t0, 2              # scale VL to byte offset
-    add a1, a1, t0              # bump pointer x
-    bnez a0, imax_loop          # loop
+    sub a0, a0, t0                      # decrement n
+    slli t0, t0, 2                      # scale VL to byte offset
+    add a1, a1, t0                      # bump pointer x
+    bnez a0, imax_loop                  # loop
 
     # TODO: set return value
 

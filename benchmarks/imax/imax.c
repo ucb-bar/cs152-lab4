@@ -6,9 +6,9 @@
 #include "imax.h"
 #include <math.h>
 
-size_t imax(size_t n, const float x[])
+unsigned int imax(unsigned int n, const float x[])
 {
-  size_t k, idx;
+  unsigned int k, idx;
   float max;
 
   max = -INFINITY;

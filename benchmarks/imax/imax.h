@@ -3,8 +3,6 @@
 #ifndef __IMAX_H
 #define __IMAX_H
 
-#include <stddef.h>
-
-extern size_t imax(size_t, const float []);
+extern unsigned int imax(unsigned int, const float []);
 
 #endif /* __IMAX_H */

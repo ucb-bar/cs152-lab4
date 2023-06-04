@@ -19,7 +19,7 @@
 
 int main( int argc, char* argv[] )
 {
-  size_t index;
+  unsigned int index;
   const float max = input_data[verify_index];
 
   // Do the imax
